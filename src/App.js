@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store'
 
 import './App.css';
 import UserList from './components/UserList';
@@ -8,21 +10,23 @@ import Home from './components/Home';
 import Page404 from './components/Page404';
 
 class App extends Component {
-    render() {
-        return (
-          <div className="App">
-            <Router>
-              <Switch>
-                  <Route exact path="/" component={Home}></Route>
-                  <Route path="/home" component={Home}></Route>
-                  <Route path="/user-list" component={UserList}></Route>
-                  <Route path="/user/:id" component={SingleUser}></Route>
-                  <Route path="*" component={Page404}></Route>
-              </Switch>
-            </Router>
-          </div>
-        );
-    }
+  render() {
+    return (
+      <div className="App">
+        <Provider store={store}>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home}></Route>
+              <Route path="/home" component={Home}></Route>
+              <Route path="/user-list" component={UserList}></Route>
+              <Route path="/user/:id" component={SingleUser}></Route>
+              <Route path="*" component={Page404}></Route>
+            </Switch>
+          </Router>
+        </Provider>
+      </div>
+    );
+  }
 }
 
 export default App;
